@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Selección de Año</title>
+</head>
+<body>
+	<select id="anios"></select>
+
+	<script>
+		var fechaActual = new Date();
+		var anioActual = fechaActual.getFullYear();
+
+		for (var i = 1900; i <= anioActual; i++) {
+			var opcion = document.createElement("option");
+			opcion.value = i;
+			opcion.text = i;
+			document.getElementById("anios").add(opcion);
+		}
+	</script>
+</body>
+</html>

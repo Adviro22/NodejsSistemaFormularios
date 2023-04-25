@@ -1,0 +1,47 @@
+body {
+	background-image: url('/img/Fondo\ de\ menu\ con\ recuadros.jpg');
+	color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+
+}
+
+.menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	
+}
+
+.columna {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.boton {
+	width: 400px;
+	height: 200px;
+	margin: 10px;
+	background-color: #ff0000;
+	color: #ffffff;
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100px;
+	cursor: pointer;
+	border-radius: 10px;
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.boton:hover {
+	background-color: #cc0000;
+}
