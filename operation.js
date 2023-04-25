@@ -1,3 +1,11 @@
 const mysql = require('mysql');
 
-function
+function insert(connection, callback){
+    let insertQuery = "INSERT INTO users (name, email) VALUES ('Josue', 'ajosueramos@gmail.com')"
+    connection.require(insertQuery, function(err, result){
+        if(err) throw err;
+        callback(result);
+    });
+}
+
+module.exports = {insert};

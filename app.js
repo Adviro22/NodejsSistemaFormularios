@@ -3,6 +3,8 @@ const app = express();
 const mysql = require("mysql");
 require("dotenv").config();
 
+const {insert} = require('./operation.js');
+
 app.use(express.json());
 
 const connection = mysql.createConnection({
@@ -20,6 +22,12 @@ connection.connect((err) => {
 
 app.get("/", (req, res) => {
   res.send("Hola Mundo")
+})
+
+app.get("/insert", (req, res) => {
+  insert(connection, result => {
+    res.json(result);
+  });
 })
 
 app.listen(3000, () => {
