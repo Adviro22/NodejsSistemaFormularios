@@ -3,7 +3,7 @@ const app = express();
 const mysql = require("mysql");
 require("dotenv").config();
 
-const {insert} = require('./operation.js');
+const {insert} = require('./operations');
 
 app.use(express.json());
 
@@ -25,10 +25,10 @@ app.get("/", (req, res) => {
 })
 
 app.get("/insert", (req, res) => {
-  insert(connection, result => {
+  insert(connection, (result) => {
     res.json(result);
   });
-})
+});
 
 app.listen(3000, () => {
   console.log("Servidor en el puerto 3000...");
