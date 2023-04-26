@@ -4,7 +4,6 @@ const app = express();
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-
 const dotenv = require('dotenv');
 dotenv.config({path:'./env/.env'});
 
@@ -32,6 +31,10 @@ app.get("/register", (req, res) => {
   res.render('register')
 })
 
+app.get('/menu1', (req, res) => {
+  res.render('menuprincipal');
+});
+
 //Register
 app.post('/register', async(req, res) => {
   const user = req.body.user;
@@ -55,9 +58,10 @@ app.post('/auth', async(req, res) =>{
   if( user && pass){
     connection.query('SELECT * FROM users WHERE user = ?', [user], async(error, results) =>{
       if(results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))){
-        res.send('Usuario o Contraseña Incorrecta');
+        res.send('Usuario o Contraseña Incorrecta'); 
       }else{
-        res.send('lOGIN CORRECTO');
+        /* res.send('lOGIN CORRECTO'); */
+        res.render('menuprincipal');
       }
     })
   }
