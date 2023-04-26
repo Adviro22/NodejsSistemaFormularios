@@ -28,6 +28,25 @@ app.get("/", (req, res) => {
   res.render('index')
 })
 
+app.get("/register", (req, res) => {
+  res.render('register')
+})
+
+//Register
+app.post('/register', async(req, res) => {
+  const user = req.body.user;
+  const name = req.body.name;
+  const pass = req.body.pass;
+  let passwordHaash = await bcryptjs.hash(pass, 8);
+  connection.query('INSERT INTO users SET ?', {user:user, name:name, pass:passwordHaash}, async(error, results)=>{
+    if(error){
+      console.log(error);
+    }else{
+      res.send('REGISTRO EXITOSO');
+    }
+  })
+})
+
 //Autentication
 app.post('/auth', async(req, res) =>{
   const user = req.body.user;
