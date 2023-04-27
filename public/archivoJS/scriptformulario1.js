@@ -12,6 +12,7 @@ function cambiarFormato() {
 	// Asignar la fecha formateada a la variable de tipo texto
 	document.getElementById("fechaFormateada").value = fechaFormateada;
 }
+
 function generate() {
     var doc = new jsPDF({
     orientation: 'l',

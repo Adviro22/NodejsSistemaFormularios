@@ -35,6 +35,10 @@ app.get('/menu1', (req, res) => {
   res.render('menuprincipal');
 });
 
+app.get('/formulario', (req, res) => {
+  res.render('formulario');
+});
+
 //Register
 app.post('/register', async(req, res) => {
   const user = req.body.user;
