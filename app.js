@@ -23,15 +23,15 @@ app.use(session({
 
 const connection = require('./database/db');
 
-app.get("/", (req, res) => {
-  res.render('index')
-})
-
 app.get("/register", (req, res) => {
   res.render('register')
 })
 
-app.get('/menu1', (req, res) => {
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/menu', (req, res) => {
   res.render('menuprincipal');
 });
 
@@ -62,14 +62,67 @@ app.post('/auth', async(req, res) =>{
   if( user && pass){
     connection.query('SELECT * FROM users WHERE user = ?', [user], async(error, results) =>{
       if(results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))){
-        res.send('Usuario o Contraseña Incorrecta'); 
+        res.render('login', {
+          alert: true,
+          alertTitle: "Error",
+          alertMessage: "USUARIO y/o PASSWORD incorrectas",
+          alertIcon:'error',
+          showConfirmButton: true,
+          timer: false,
+          ruta: 'login'    
+      });
       }else{
-        /* res.send('lOGIN CORRECTO'); */
-        res.render('menuprincipal');
-      }
+        //creamos una var de session y le asignamos true si INICIO SESSION       
+				req.session.loggedin = true;                
+				req.session.name = results[0].name;
+				res.render('login', {
+					alert: true,
+					alertTitle: "Conexión exitosa",
+					alertMessage: "¡LOGIN CORRECTO!",
+					alertIcon:'success',
+					showConfirmButton: false,
+					timer: 1500,
+					ruta: ''
+				});        			
+			}		
+  
     })
+  }else{
+    res.send('Por favor ingrese un usuario y contraseña');
   }
 })
+
+//12 - Método para controlar que está auth en todas las páginas
+app.get('/', (req, res)=> {
+	if (req.session.loggedin) {
+		res.render('index',{
+			login: true,
+			name: req.session.name			
+		});		
+	} else {
+		res.render('index',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
+
+//función para limpiar la caché luego del logout
+app.use(function(req, res, next) {
+  if (!req.user)
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  next();
+});
+
+//Logout
+//Destruye la sesión.
+app.get('/logout', function (req, res) {
+req.session.destroy(() => {
+  res.redirect('/') // siempre se ejecutará después de que se destruya la sesión
+})
+});
+
 
 app.listen(3000, () => {
   console.log("Servidor en el puerto 3000...");
