@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const auth = require('./auth');
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use(session({
 
 const connection = require('./database/db');
 
+
 app.get("/register", (req, res) => {
   res.render('register')
 })
@@ -31,11 +33,11 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.get('/menu', (req, res) => {
+app.get('/menu', auth, (req, res) => {
   res.render('menuprincipal');
 });
 
-app.get('/formulario', (req, res) => {
+app.get('/formulario', auth, (req, res) => {
   res.render('formulario');
 });
 
