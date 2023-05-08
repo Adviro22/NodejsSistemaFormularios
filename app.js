@@ -17,10 +17,10 @@ const bcryptjs = require('bcryptjs');
 
 const session = require('express-session');
 app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized:true
-}))
+  secret: 'my-secret-key',
+  resave: false,
+  saveUninitialized: false
+}));
 
 const connection = require('./database/db');
 
@@ -33,12 +33,12 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.get('/menu', auth, (req, res) => {
+app.get('/menuprincipal', auth, (req, res) => {
   res.render('menuprincipal');
 });
 
-app.get('/formulario', auth, (req, res) => {
-  res.render('formulario');
+app.get('/formulario1', auth, (req, res) => {
+  res.render('formulario1');
 });
 
 //Register
@@ -95,6 +95,7 @@ app.post('/auth', async(req, res) =>{
 })
 
 //12 - Método para controlar que está auth en todas las páginas
+/*
 app.get('/', (req, res)=> {
 	if (req.session.loggedin) {
 		res.render('index',{
@@ -108,6 +109,21 @@ app.get('/', (req, res)=> {
 		});				
 	}
 	res.end();
+});
+*/
+
+app.get('/', auth, (req, res)=> {
+	if (req.session.loggedin) {
+		res.render('index',{
+			login: true,
+			name: req.session.name			
+		});		
+	} else {
+		res.render('index',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
 });
 
 //función para limpiar la caché luego del logout
