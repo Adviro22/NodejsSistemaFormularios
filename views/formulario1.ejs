@@ -7,9 +7,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/css/style_formulario1.css">
 	<script src="resources/archivoJS/scriptformulario1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 </head>
 <body>
 	<div class="container" id ="prueba">
@@ -28,7 +27,7 @@
 			<label for="fechaEmision">ISSUED DATE:</label>
 			<input type="date" id="fechaEmision" name="fechaEmision" onchange="cambiarFormato()">
 	
-			<label for="fechaFormateada">Fecha formateada:</label>
+			<label for="fechaFormateada">Formatted Date:</label>
 			<input type="text" id="fechaFormateada" name="fechaFormateada" readonly>
 
 			<label for="marca">MAKE:</label>
@@ -62,7 +61,7 @@
 			<input type="text" id="coidgozip" name="coidgozip" placeholder="zip code">
 
 <!--			<button type="button" id="generar-pdf" onclick="generatePDF()">Generar PDF</button>-->
-			<button type="button" id="generar-pdf" onclick="generate()">Generar PDF</button>
+			<button type="button" id="generar-pdf" onclick="generate()">Generate PDF</button>
 
 
 		</form>
