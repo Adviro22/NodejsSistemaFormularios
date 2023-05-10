@@ -22,7 +22,9 @@ function generate() {
 	//const fechaEmision = document.getElementById('fechaEmision').value;
 	//const fechaFormateada = document.getElementById('fechaFormateada').value;
 	const marca = document.getElementById('marca').value;
+	//const model = document.getElementById('model').value;
 	const year = document.getElementById('year').value;
+	//const body_style = document.getElementById('body_style').value;
 	//const mailingaddress = document.getElementById('mailingaddress').value;
 	//const ciudad = document.getElementById('ciudad').value;
 	//const estado = document.getElementById('estado').value;

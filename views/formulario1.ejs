@@ -27,7 +27,7 @@
 			<input type="date" id="fechaEmision" name="fechaEmision" onchange="cambiarFormato()" >
 		
 			<label for="fechaFormateada">Formatted Date:</label>
-			<input type="text" id="fechaFormateada" name="fechaFormateada">
+			<input type="text" id="fechaFormateada" name="fechaFormateada" readonly>
 
 			<label for="validity_days">VALIDITY DAYS:</label>
 			<select type="text" id="validity_days" name="validity_days" placeholder="validity_days">
@@ -35,9 +35,26 @@
 				<option value="30">30 días</option>
 				<option value="60">60 días</option>
 				<option value="90">90 días</option>
+				<option value="180">180 días</option>
+				<option value="360">360 días</option>
 			</select>
 			<label for="marca">MAKE:</label>
 			<input type="text" id="marca" name="marca" placeholder="make" >
+
+			<label for="model">MODEL:</label>
+			<input type="text" id="model" name="model" placeholder="model" >
+
+			<label for="body_style">BODY STYLE:</label>
+			<select type="text" id="body_style" name="body_style" placeholder="body_style">
+				<option value=""></option>
+				<option value="2D">2D</option>
+				<option value="3D">3D</option>
+				<option value="4D">4D</option>
+				<option value="5D">5D</option>
+				<option value="PK">PK</option>
+				<option value="TR">TR</option>
+				<option value="LL">LL</option>
+			</select>
 		
 			<label for="year">YEAR:</label>
 			<select id="year" name="year" required></select required>
