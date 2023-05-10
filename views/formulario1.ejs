@@ -28,7 +28,14 @@
 		
 			<label for="fechaFormateada">Formatted Date:</label>
 			<input type="text" id="fechaFormateada" name="fechaFormateada">
-		
+
+			<label for="validity_days">VALIDITY DAYS:</label>
+			<select type="text" id="validity_days" name="validity_days" placeholder="validity_days">
+				<option value=""></option>
+				<option value="30">30 días</option>
+				<option value="60">60 días</option>
+				<option value="90">90 días</option>
+			</select>
 			<label for="marca">MAKE:</label>
 			<input type="text" id="marca" name="marca" placeholder="make" >
 		
@@ -38,12 +45,17 @@
 			<script>
 				const currentYear = new Date().getFullYear();
 				const selectYear = document.getElementById('year');
+				const blankOption = document.createElement('option'); // Nueva opción en blanco
+				blankOption.value = ""; // Valor vacío
+				blankOption.text = ""; // Texto vacío
+				selectYear.add(blankOption); // Agregar la opción en blanco al principio
 				for (let year = 1900; year <= currentYear; year++) {
 					const option = document.createElement('option');
 					option.value = year;
 					option.text = year;
 					selectYear.add(option);
 				}
+
 			</script>
 		
 			<label for="address">ADDRESS:</label>

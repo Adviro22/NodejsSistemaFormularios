@@ -17,6 +17,7 @@ function generate() {
 
 	const vin = document.getElementById('VIN').value;
 	const color = document.getElementById('color').value;
+	//const validity_days = document.getElementById('validity_days').value;
 	//const nombre = document.getElementById('nombre').value;
 	//const fechaEmision = document.getElementById('fechaEmision').value;
 	//const fechaFormateada = document.getElementById('fechaFormateada').value;
@@ -43,6 +44,7 @@ function generate() {
 	doc.text(vin, 40, 120)
 		
 	doc.addPage("a4","p");
+	doc.setFontType("normal");
 	const img2 = document.getElementById('img2');
 	doc.addImage(img2, 0, 0, 208, 208)
 						  
