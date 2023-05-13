@@ -24,10 +24,7 @@
 			<input type="text" id="nombre" name="nombre" placeholder="name">
 		
 			<label for="fechaEmision">ISSUED DATE:</label>
-			<input type="date" id="fechaEmision" name="fechaEmision" onchange="cambiarFormato()" >
-		
-			<label for="fechaFormateada">Formatted Date:</label>
-			<input type="text" id="fechaFormateada" name="fechaFormateada" readonly>
+			<input type="date" id="fechaEmision" name="fechaEmision">
 
 			<label for="validity_days">VALIDITY DAYS:</label>
 			<select type="text" id="validity_days" name="validity_days" placeholder="validity_days">
@@ -88,7 +85,7 @@
 			<label for="coidgozip">Zip Code:</label>
 			<input type="text" id="coidgozip" name="coidgozip" placeholder="zip code" >
 		
-			<input type="button" value="Generate PDF" id="generar-pdf" onclick="generate()">
+			<input type="button" value="Generate PDF" id="generar-pdf" onclick="calcularFecha(),generate()">
 		</form>
 	</div>
 	<img src="resources/img/Plantillapractica.png" alt="" width="500px" id="img1" style="display:none;">

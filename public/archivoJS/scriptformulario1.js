@@ -1,20 +1,29 @@
+let fechvenc;
 
-function cambiarFormato() {
-	// Obtener la fecha del formulario
-	const fechaFormulario = document.getElementById("fechaEmision").value;
+function calcularFecha() {
+    // Obtener la fecha establecida en la variable existente
+    const fechaEmision = document.getElementById('fechaEmision').value;
 
-	// Crear un objeto de fecha Moment.js a partir de la cadena de texto
-	const fechaMoment = moment(fechaFormulario);
+    // Obtener la cantidad de días seleccionados en el select
+    const validityDays = document.getElementById('validity_days').value;
 
-	// Formatear la fecha en el formato deseado
-	const FechaFormateada = fechaMoment.format("MM/DD/YYYY");
+    // Convertir la fecha a un objeto Date
+    const fechaEmisionObj = new Date(fechaEmision);
 
-	// Asignar la fecha formateada a la variable de tipo texto
-	document.getElementById("fechaFormateada").value = FechaFormateada;
+    // Agregar los días seleccionados a la fecha existente
+    fechaEmisionObj.setDate(fechaEmisionObj.getDate() + parseInt(validityDays));
+
+    // Convertir la nueva fecha a un formato legible
+    const nuevaFecha = fechaEmisionObj.toLocaleDateString();
+
+    // Formatear la fecha de vencimiento en el formato deseado (MMM DD, YYYY)
+    let fechaVencimientoFormateada = moment(fechaEmisionObj.toISOString())
+        .format("MMM DD, YYYY")
+        .toUpperCase();
+	fechvenc = fechaVencimientoFormateada
 }
 
 function generate() {
-
 	const vin = document.getElementById('VIN').value;
 	const color = document.getElementById('color').value;
 	//const validity_days = document.getElementById('validity_days').value;
@@ -37,13 +46,26 @@ function generate() {
 		putOnlyUsedFonts:true,
 		floatPrecision: 16 // or "smart", default is 16
 		});
-		
-		
+	
 	const img1 = document.getElementById('img1');
 	doc.addImage(img1, 0, 30, 300, 150)
-	doc.setFontSize(55);
-	doc.setFontType("bold");
-	doc.text(vin, 40, 120)
+	doc.setFontSize(170)
+	doc.setFontType("bold")
+
+	// Define el texto que deseas centrar	
+	var text = vin;
+
+	// Obtiene la anchura del texto
+	var textWidth = doc.getTextWidth(text);
+
+	// Calcula la posición x para centrar el texto
+	var xPos = (doc.internal.pageSize.getWidth() - textWidth) / 2;
+
+	// Dibuja el texto centrado en el eje de las x
+	doc.text(text, xPos, 133);
+	//doc.text(vin, 40, 120)
+	doc.setFontSize(70)
+	doc.text(fechvenc, 77, 85);
 		
 	doc.addPage("a4","p");
 	doc.setFontType("normal");
