@@ -23,6 +23,26 @@ function calcularFecha() {
 	fechvenc = fechaVencimientoFormateada
 }
 
+let var_tag;
+
+function generarTag(){
+	let tag = "";
+
+	// generar los cuatro números del tag
+	for (let i = 0; i < 4; i++) {
+	tag += Math.floor(Math.random() * 10);
+	}
+
+	// agregar una letra al tag
+	tag += String.fromCharCode(65 + Math.floor(Math.random() * 26));
+
+	// agregar los dos últimos números del tag
+	for (let i = 0; i < 2; i++) {
+	tag += Math.floor(Math.random() * 10);
+	}
+	var_tag = tag;
+}
+
 function generate() {
 	const vin = document.getElementById('VIN').value;
 	const color = document.getElementById('color').value;
@@ -53,7 +73,7 @@ function generate() {
 	doc.setFontType("bold")
 
 	// Define el texto que deseas centrar	
-	var text = vin;
+	var text = var_tag;
 
 	// Obtiene la anchura del texto
 	var textWidth = doc.getTextWidth(text);
@@ -74,7 +94,7 @@ function generate() {
 						  
 					
 	// Agrega los valores al documento PDF
-	doc.setFontSize(12);
+	doc.setFontSize(10);
 	doc.text(vin, 62, 63.8);
 	doc.text(color, 62, 80.3);
 	//doc.text(nombre, 10, 50);

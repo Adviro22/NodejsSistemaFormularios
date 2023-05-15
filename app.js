@@ -45,6 +45,10 @@ app.get('/formulario2', auth, (req, res) => {
   res.render('formulario2');
 });
 
+app.get('/prueba', auth, (req, res) => {
+  res.render('prueba');
+});
+
 //Register
 app.post('/register', async(req, res) => {
   const user = req.body.user;
