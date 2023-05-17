@@ -1,25 +1,23 @@
 let fechvenc;
+let fechvenc2;
 let fechini;
 
 function calcularFecha() {
     // Obtener la fecha establecida en la variable existente
     const fechaEmision = document.getElementById('fechaEmision').value;
-	console.log("Antes de ser objeto: "+fechaEmision)
 
     // Obtener la cantidad de días seleccionados en el select
     const validityDays = document.getElementById('validity_days').value;
 
     // Convertir la fecha a un objeto Date
-	const fechaEmisionObj2 = new Date(fechaEmision + 'T00:00:00Z');
-	fechaEmisionObj2.setUTCHours(0,0,0,0);
+    const fechaEmisionObj2 = new Date(fechaEmision + 'T00:00:00Z');
+    fechaEmisionObj2.setUTCHours(0, 0, 0, 0);
 
-	const fechaEmisionObj = new Date(fechaEmision + 'T00:00:00Z');
-	fechaEmisionObj.setUTCHours(0,0,0,0);
-	//fechaEmisionObj.setHours(0,0,0,0);
+    const fechaEmisionObj = new Date(fechaEmision + 'T00:00:00Z');
+    fechaEmisionObj.setUTCHours(0, 0, 0, 0);
 
-	fechaEmisionObj2.setUTCDate(fechaEmisionObj2.getUTCDate() + 1);
-	fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + 1);
-
+    fechaEmisionObj2.setUTCDate(fechaEmisionObj2.getUTCDate() + 1);
+    fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + 1);
 
     // Agregar los días seleccionados a la fecha existente
     fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + parseInt(validityDays));
@@ -37,9 +35,19 @@ function calcularFecha() {
         .format("MMM DD, YYYY")
         .toUpperCase();
 	
+    // Formatear la fecha de emisión 2 en el formato deseado (MMDDYYYY)
+    let fechaEmision2Formateada = fechaEmisionObj.toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric"
+    }).replace(/\//g, "");
+
     fechvenc = fechaVencimientoFormateada;
     fechini = fechaEmisionFormateada;
+    fechvenc2 = fechaEmision2Formateada;
 }
+
+
 
 
 let var_tag;
@@ -103,11 +111,42 @@ function generate() {
 	//doc.text(vin, 40, 120)
 	doc.setFontSize(70)
 	doc.text(fechvenc, 77, 85);
-	doc.setFontSize(40);
+	doc.setFontSize(23);
 	doc.text(year, 13, 147.5);
-	doc.text(make, 13, 160);
-	doc.setFontSize(20);
-	doc.text(vin, 190, 143);
+	doc.text(make, 13, 155);
+	doc.text(vin, 196, 143);
+
+
+	var x = 288;
+	var y = 50;
+	
+	var blanco = "#FFFFFF"; // Blanco en formato hexadecimal
+	var negro = "#000000"; // Negro en formato hexadecimal
+
+
+	// Establecer el color de texto
+	doc.setTextColor(blanco);
+	// Definir el espaciado entre las letras
+	var spacing = 15;
+
+	// Definir el tamaño de fuente
+	var fontSize = 20;
+
+	// Agregar las letras verticalmente
+	var texto = fechvenc2;
+
+	// Iterar sobre cada letra del texto
+	for (var i = 0; i < texto.length; i++) {
+	var letra = texto[i];
+	
+	// Calcular las coordenadas y para cada letra
+	var letraY = y + (i * spacing);
+	
+	// Agregar la letra verticalmente
+	doc.setFontSize(fontSize);
+	doc.text(letra, x, letraY);
+	}
+
 		
 	doc.addPage("a4","p");
 	doc.setFontType("normal");
@@ -117,6 +156,7 @@ function generate() {
 					
 	// Agrega los valores al documento PDF
 	doc.setFontSize(10);
+	doc.setTextColor(negro);
 	doc.text(var_tag, 62, 29);
 	doc.text(fechini, 150, 29);
 	doc.text(fechvenc, 150, 34);
