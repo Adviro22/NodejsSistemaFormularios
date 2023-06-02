@@ -1,6 +1,7 @@
 let fechvenc;
 let fechvenc2;
 let fechini;
+let fechaFormateada
 
 function calcularFecha() {
     // Obtener la fecha establecida en la variable existente
@@ -45,11 +46,26 @@ function calcularFecha() {
     fechvenc = fechaVencimientoFormateada;
     fechini = fechaEmisionFormateada;
     fechvenc2 = fechaEmision2Formateada;
+
+	// Convierte la fecha original en un objeto de fecha
+	var fechaObjeto = new Date(fechini);
+
+	// Obtiene el mes en formato de texto con la primera letra en mayúscula
+	var mes = fechaObjeto.toLocaleString('default', { month: 'short' });
+
+	// Capitaliza el primer carácter del mes
+	mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+
+	// Obtiene el día del mes
+	var dia = fechaObjeto.getDate();
+
+	// Obtiene el año
+	var anio = fechaObjeto.getFullYear();
+
+	// Combina los valores en el formato deseado: 'May 30, 2023'
+	fechaFormateada = mes + ' ' + dia + ', ' + anio;
+
 }
-
-
-
-
 let var_tag;
 
 function generarTag(){
@@ -107,18 +123,18 @@ function generate() {
 	var xPos = (doc.internal.pageSize.getWidth() - textWidth) / 2;
 
 	// Dibuja el texto centrado en el eje de las x
-	doc.text(text, xPos, 133);
+	doc.text(text, xPos, 130);
 	//doc.text(vin, 40, 120)
 	doc.setFontSize(70)
-	doc.text(fechvenc, 77, 85);
+	doc.text(fechvenc, 77, 82);
 	doc.setFontSize(23);
-	doc.text(year, 13, 147.5);
-	doc.text(make, 13, 155);
+	doc.text(year, 13, 143);
+	doc.text(make, 13, 152);
 	doc.text(vin, 196, 143);
 
 
 	var x = 288;
-	var y = 50;
+	var y = 70;
 	
 	var blanco = "#FFFFFF"; // Blanco en formato hexadecimal
 	var negro = "#000000"; // Negro en formato hexadecimal
@@ -127,7 +143,7 @@ function generate() {
 	// Establecer el color de texto
 	doc.setTextColor(blanco);
 	// Definir el espaciado entre las letras
-	var spacing = 15;
+	var spacing = 10;
 
 	// Definir el tamaño de fuente
 	var fontSize = 20;
@@ -160,7 +176,7 @@ function generate() {
 	doc.text(var_tag, 62, 29);
 	doc.text(fechini, 150, 29);
 	doc.text(fechvenc, 150, 34);
-	doc.text(fechini, 62, 58.3);
+	doc.text(fechaFormateada, 62, 58.3);
 	doc.text(vin, 62, 63.8);
 	doc.text(color, 62, 80.3);
 	doc.text(make, 62, 74.8);
@@ -175,4 +191,7 @@ function generate() {
 	doc.save("formulario.pdf");
 	
     
-}	
+}
+function convertirMayusculas(input) {
+	input.value = input.value.toUpperCase();
+}

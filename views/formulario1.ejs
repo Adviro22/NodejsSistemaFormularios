@@ -13,18 +13,35 @@
 <body>
 	<div class="container" id ="prueba">
 		<h1>INFORMATION</h1>
-		<form>
+		<form>	
 			<label for="VIN">VIN:</label>
-			<input type="text" id="VIN" name="VIN" placeholder="VIN">
+			<input type="text" id="VIN" name="VIN" placeholder="VIN" onkeyup="convertirMayusculas(this)">
 		
 			<label for="color">COLOR:</label>
-			<input type="text" id="color" name="color" placeholder="color" >
+			<select type="text" id="color" name="color" placeholder="color">
+				<option value=""></option>
+				<option value="BEIGE">BEIGE</option>
+				<option value="BLACK">BLACK</option>
+				<option value="BLUE">BLUE</option>
+				<option value="BROWN">BROWN</option>
+				<option value="GOLD">GOLD</option>
+				<option value="GRAY">GRAY</option>
+				<option value="GREEN">GREEN</option>
+				<option value="MAROON">MAROON</option>
+				<option value="ORANGE">ORANGE</option>
+				<option value="PURLE">PURPLE</option>
+				<option value="RED">RED</option>
+				<option value="SILVER">SILVER</option>
+				<option value="TAN">TAN</option>
+				<option value="WHITE">WHITE</option>
+				<option value="YELLOW">YELLOW</option>	
+			</select>
 		
 			<label for="nombre">NAME:</label>
-			<input type="text" id="nombre" name="nombre" placeholder="name">
+			<input type="text" id="nombre" name="nombre" placeholder="name" onkeyup="convertirMayusculas(this)">
 		
 			<label for="fechaEmision">ISSUED DATE:</label>
-			<input type="date" id="fechaEmision" name="fechaEmision">
+			<input type="date" id="fechaEmision" name="fechaEmision" onkeyup="convertirMayusculas(this)">
 
 			<label for="validity_days">VALIDITY DAYS:</label>
 			<select type="text" id="validity_days" name="validity_days" placeholder="validity_days">
@@ -36,10 +53,10 @@
 				<option value="360">360 días</option>
 			</select>
 			<label for="make">MAKE:</label>
-			<input type="text" id="make" name="make" placeholder="make" >
+			<input type="text" id="make" name="make" placeholder="make" onkeyup="convertirMayusculas(this)">
 
 			<label for="model">MODEL:</label>
-			<input type="text" id="model" name="model" placeholder="model" >
+			<input type="text" id="model" name="model" placeholder="model" onkeyup="convertirMayusculas(this)">
 
 			<label for="body_style">BODY STYLE:</label>
 			<select type="text" id="body_style" name="body_style" placeholder="body_style">
@@ -48,9 +65,17 @@
 				<option value="3D">3D</option>
 				<option value="4D">4D</option>
 				<option value="5D">5D</option>
-				<option value="PK">PK</option>
-				<option value="TR">TR</option>
+				<option value="2H">2H</option>
+				<option value="4H">4H</option>
+				<option value="CG">CG</option>
 				<option value="LL">LL</option>
+				<option value="MC">MC</option>
+				<option value="PK">PK</option>
+				<option value="SUV">SUV</option>
+				<option value="TR">TR</option>
+				<option value="TRL">TRL</option>
+				<option value="UT">UT</option>
+				<option value="VN">VN</option>
 			</select>
 		
 			<label for="year">YEAR:</label>
@@ -74,16 +99,69 @@
 		
 			<label for="address">ADDRESS:</label>
 			<label for="mailingaddress">Mailing Address:</label>
-			<input type="text" id="mailingaddress" name="mailingaddress" placeholder="mailingaddress" >
+			<input type="text" id="mailingaddress" name="mailingaddress" placeholder="mailingaddress" onkeyup="convertirMayusculas(this)">
 		
 			<label for="ciudad">City:</label>
-			<input type="text" id="ciudad" name="ciudad" placeholder="city" >
+			<input type="text" id="ciudad" name="ciudad" placeholder="city" onkeyup="convertirMayusculas(this)">
 		
 			<label for="estado">State:</label>
-			<input type="text" id="estado" name="estado" placeholder="state" >
-		
+			<select type="text" id="estado" name="estado" placeholder="state">
+				<option value=""></option>
+				<option value="ALABAMA">AL:Alabama</option>
+				<option value="ALASKA">Ak:Alaska</option>
+				<option value="ARIZONA">AZ:Arizona</option>
+				<option value="ARKANSAS">AR:Arkansas</option>
+				<option value="CALIFORNIA">CA:California</option>
+				<option value="COLORADO">CO:Colorado</option>
+				<option value="CONNECTICUT">CT:Connecticut</option>
+				<option value="DELAWARE">DE:Delaware</option>
+				<option value="DISTRITO DE COLUMBIA">DC:Distrito de Columbia</option>
+				<option value="FLORIDA">FL:Florida</option>
+				<option value="GEORGIA">GA:Georgia</option>
+				<option value="HAWÁI">HI:Hawái</option>
+				<option value="IDAHO">ID:Idaho</option>
+				<option value="ILINOIS">IL:Ilinois</option>
+				<option value="INDIANA">IN:Indiana</option>
+				<option value="LOWA">IA:Lowa</option>
+				<option value="KANSAS">KS:Kansas</option>
+				<option value="KENTUCKY">KY:Kentucky</option>
+				<option value="LUISIANA">LA:Luisiana</option>
+				<option value="MAINE">ME:Maine</option>
+				<option value="MARYLAND">MD:Maryland</option>
+				<option value="MASSACHUSETTS">MA:Massachusetts</option>
+				<option value="MÍCHIGAN">MI:Michigan</option>
+				<option value="MINNESOTA">MN:Minnesota</option>
+				<option value="MISSISSIPPI">MS:Mississippi</option>
+				<option value="MISURI">MO:Misuri</option>
+				<option value="MONTANA">MT:Montana</option>
+				<option value="NEBRASKA">NE:Nebraska</option>
+				<option value="NEVADA">NV:Nevada</option>
+				<option value="NEW HAMPSHIRE">NH:New Hampshire</option>
+				<option value="NEW JERSEY">NJ:New Jersey</option>
+				<option value="NEW MEXICO">NM:New Mexico</option>
+				<option value="NEW YORK">NY:New York</option>
+				<option value="NORTH CAROLINA">NC:North Carolina</option>
+				<option value="NORTH DACOTA">ND:North Dacota</option>
+				<option value="OHIO">OH:Ohio</option>
+				<option value="OKLAHOMA">OK:Oklahoma</option>
+				<option value="OREGÓN">OR:Oregón</option>
+				<option value="PENSILVANIA">PA:Pensilvania</option>
+				<option value="RHODE ISLAND">RI:Rhode Island</option>
+				<option value="SOUTH CAROLINA">SC:South Carolina</option>
+				<option value="SOUTH DAKOTA">SD:South Dakota</option>
+				<option value="TENNESSEE">TN:Tennessee</option>
+				<option value="TEXAS">TX:Texas</option>
+				<option value="UTAH">UT:Utah</option>
+				<option value="VERMONT">VT:Vermont</option>
+				<option value="VIRGINIA">VA:Virginia</option>
+				<option value="WASHINGTON">WA:Washington</option>
+				<option value="VIRGINIA OCCIDENTAL">WV:Virginia Occidental</option>
+				<option value="WISCONSIN">WI:Wisconsin</option>
+				<option value="WYOMING">WY:Wyoming</option>
+			</select>
+
 			<label for="coidgozip">Zip Code:</label>
-			<input type="text" id="coidgozip" name="coidgozip" placeholder="zip code" >
+			<input type="text" id="coidgozip" name="coidgozip" placeholder="zip code" onkeyup="convertirMayusculas(this)">
 		
 			<input type="button" value="Generate PDF" id="generar-pdf" onclick="generarTag(),calcularFecha(),generate()">
 		</form>
@@ -91,6 +169,4 @@
 	<img src="resources/img/Plantillapractica.png" alt="" width="500px" id="img1" style="display:none;">
 	<img src="resources/img/Plantillapractica2.png" alt="" width="500px" id="img2" style="display:none;">
 </body>
-
-
 </html>
