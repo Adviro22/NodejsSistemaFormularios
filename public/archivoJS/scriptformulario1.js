@@ -86,6 +86,9 @@ function generarTag(){
 	var_tag = tag;
 }
 
+function genearQR(){
+}
+
 function generate() {
 	const vin = document.getElementById('VIN').value;
 	const color = document.getElementById('color').value;
@@ -100,6 +103,39 @@ function generate() {
 	const cityandstate = ciudad + ", " + estado;
 	const coidgozip = document.getElementById('coidgozip').value;
 		
+	//QR codigo
+	/*
+	let contenedorQR = document.getElementById("contenedorQR");
+	let nombreVariable = "Jennifer%20Lopez";
+	let edad = "21%20años";
+
+	const textoQR = `http://127.0.0.1:5500/html/ejemplo.html?nombre=${nombreVariable}&edad=${edad}`;
+	new QRCode(contenedorQR, {
+		text: textoQR,
+		width: 128,
+		height: 128,
+	});
+	*/
+	// Crea una instancia de QRCode.js con la configuración deseada
+	// Crea una instancia de QRCode.js con la configuración deseada
+	const qrContainer = document.getElementById('qrContainer');
+
+	const qrcode = new QRCode(qrContainer, {
+		text: 'https://www.example.com',
+		width: 128,
+		height: 128
+	});
+
+	const qrCodeDataURL = qrcode._el.querySelector('canvas').toDataURL();
+
+	const imgElement = document.createElement('img');
+	imgElement.src = qrCodeDataURL;
+	imgElement.id = 'qrImage';
+
+	qrContainer.innerHTML = '';
+	qrContainer.appendChild(imgElement);
+
+	// Agregar la imagen al documento PDF
 	var doc = new jsPDF({
 		orientation: 'l',
 		unit: 'mm',
@@ -110,8 +146,11 @@ function generate() {
 	
 	const img1 = document.getElementById('img1');
 	doc.addImage(img1, 0, 30, 300, 150)
-	doc.setFontSize(170)
+	doc.setFontSize(170)	
 	doc.setFontType("bold")
+	
+	const imgQR = document.getElementById("qrImage");
+	doc.addImage(imgQR, 241, 52, 30,30)
 
 	// Define el texto que deseas centrar	
 	var text = var_tag;
