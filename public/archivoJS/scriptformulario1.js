@@ -2,50 +2,52 @@ let fechvenc;
 let fechvenc2;
 let fechini;
 let fechaFormateada
+let fechaEmisionObj; // Variable global para fechaEmisionObj
+let fechaEmisionObj2; // Variable global para fechaEmisionObj2
 
 function calcularFecha() {
-    // Obtener la fecha establecida en la variable existente
-    const fechaEmision = document.getElementById('fechaEmision').value;
+	// Obtener la fecha establecida en la variable existente
+	const fechaEmision = document.getElementById('fechaEmision').value;
 
-    // Obtener la cantidad de días seleccionados en el select
-    const validityDays = document.getElementById('validity_days').value;
+	// Obtener la cantidad de días seleccionados en el select
+	const validityDays = document.getElementById('validity_days').value;
 
-    // Convertir la fecha a un objeto Date
-    const fechaEmisionObj2 = new Date(fechaEmision + 'T00:00:00Z');
-    fechaEmisionObj2.setUTCHours(0, 0, 0, 0);
+	// Convertir la fecha a un objeto Date
+	fechaEmisionObj2 = new Date(fechaEmision + 'T00:00:00Z');
+	fechaEmisionObj2.setUTCHours(0, 0, 0, 0);
 
-    const fechaEmisionObj = new Date(fechaEmision + 'T00:00:00Z');
-    fechaEmisionObj.setUTCHours(0, 0, 0, 0);
+	fechaEmisionObj = new Date(fechaEmision + 'T00:00:00Z');
+	fechaEmisionObj.setUTCHours(0, 0, 0, 0);
 
-    fechaEmisionObj2.setUTCDate(fechaEmisionObj2.getUTCDate() + 1);
-    fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + 1);
+	fechaEmisionObj2.setUTCDate(fechaEmisionObj2.getUTCDate() + 1);
+	fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + 1);
 
-    // Agregar los días seleccionados a la fecha existente
-    fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + parseInt(validityDays));
+	// Agregar los días seleccionados a la fecha existente
+	fechaEmisionObj.setUTCDate(fechaEmisionObj.getUTCDate() + parseInt(validityDays));
 
-    // Convertir la nueva fecha a un formato legible
-    const nuevaFecha = fechaEmisionObj.toLocaleDateString();
+	// Convertir la nueva fecha a un formato legible
+	const nuevaFecha = fechaEmisionObj.toLocaleDateString();
 
-    // Formatear la fecha de emisión en el formato deseado (MMM DD, YYYY)
-    let fechaEmisionFormateada = moment(fechaEmisionObj2.toISOString())
-        .format("MMM DD, YYYY")
-        .toUpperCase();
-    
-    // Formatear la fecha de vencimiento en el formato deseado (MMM DD, YYYY)
-    let fechaVencimientoFormateada = moment(fechaEmisionObj.toISOString())
-        .format("MMM DD, YYYY")
-        .toUpperCase();
+	// Formatear la fecha de emisión en el formato deseado (MMM DD, YYYY)
+	let fechaEmisionFormateada = moment(fechaEmisionObj2.toISOString())
+		.format("MMM DD, YYYY")
+		.toUpperCase();
 	
-    // Formatear la fecha de emisión 2 en el formato deseado (MMDDYYYY)
-    let fechaEmision2Formateada = fechaEmisionObj.toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric"
-    }).replace(/\//g, "");
+	// Formatear la fecha de vencimiento en el formato deseado (MMM DD, YYYY)
+	let fechaVencimientoFormateada = moment(fechaEmisionObj.toISOString())
+		.format("MMM DD, YYYY")
+		.toUpperCase();
+	
+	// Formatear la fecha de emisión 2 en el formato deseado (MMDDYYYY)
+	let fechaEmision2Formateada = fechaEmisionObj.toLocaleDateString("en-US", {
+		month: "2-digit",
+		day: "2-digit",
+		year: "numeric"
+	}).replace(/\//g, "");
 
-    fechvenc = fechaVencimientoFormateada;
-    fechini = fechaEmisionFormateada;
-    fechvenc2 = fechaEmision2Formateada;
+	fechvenc = fechaVencimientoFormateada;
+	fechini = fechaEmisionFormateada;
+	fechvenc2 = fechaEmision2Formateada;
 
 	// Convierte la fecha original en un objeto de fecha
 	var fechaObjeto = new Date(fechini);
@@ -93,7 +95,7 @@ function generate() {
 	const vin = document.getElementById('VIN').value;
 	const color = document.getElementById('color').value;
 	const nombre = document.getElementById('nombre').value;
-	const make = document.getElementById('make').value;
+	const marca = document.getElementById('make').value;
 	const model = document.getElementById('model').value;
 	const year = document.getElementById('year').value;
 	const body_style = document.getElementById('body_style').value;
@@ -104,26 +106,28 @@ function generate() {
 	const coidgozip = document.getElementById('coidgozip').value;
 		
 	//QR codigo
-	/*
-	let contenedorQR = document.getElementById("contenedorQR");
-	let nombreVariable = "Jennifer%20Lopez";
-	let edad = "21%20años";
-
-	const textoQR = `http://127.0.0.1:5500/html/ejemplo.html?nombre=${nombreVariable}&edad=${edad}`;
-	new QRCode(contenedorQR, {
-		text: textoQR,
-		width: 128,
-		height: 128,
-	});
-	*/
-	// Crea una instancia de QRCode.js con la configuración deseada
-	// Crea una instancia de QRCode.js con la configuración deseada
 	const qrContainer = document.getElementById('qrContainer');
+	// Crear las variables sin espacios
+	//
+
+	let fechinimodificada = fechini
+	let fechvencmodificada = fechvenc
+
+	// Convertir la cadena de texto a un objeto Moment.js
+	const fechaMoment = moment(fechini, 'MMM DD, YYYY');
+	const fechaMoment2 = moment(fechvenc, 'MMM DD, YYYY');
+
+	// Obtener la fecha formateada en el formato deseado (MM/DD/YYYY)
+	const fechaInicioFormateada = fechaMoment.format('MM/DD/YYYY');
+	const fechaVencFormateada = fechaMoment2.format('MM/DD/YYYY');
+
+	const url = `http://127.0.0.1:5501/public/Archivoshtml/plantilla1.html?tag=${var_tag}&fecha1=${fechaInicioFormateada}&fecha2=${fechaVencFormateada}&vin=${vin}&year=${year}&body_style=${body_style}&color=${color}&marca=${marca}`
+	console.log(url)
 
 	const qrcode = new QRCode(qrContainer, {
-		text: 'https://www.example.com',
-		width: 128,
-		height: 128
+		text: url,
+		width: 200,
+		height: 200
 	});
 
 	const qrCodeDataURL = qrcode._el.querySelector('canvas').toDataURL();
@@ -131,10 +135,10 @@ function generate() {
 	const imgElement = document.createElement('img');
 	imgElement.src = qrCodeDataURL;
 	imgElement.id = 'qrImage';
+	imgElement.style.display = 'none';
 
 	qrContainer.innerHTML = '';
 	qrContainer.appendChild(imgElement);
-
 	// Agregar la imagen al documento PDF
 	var doc = new jsPDF({
 		orientation: 'l',
@@ -148,10 +152,8 @@ function generate() {
 	doc.addImage(img1, 0, 30, 300, 150)
 	doc.setFontSize(170)	
 	doc.setFontType("bold")
-	
 	const imgQR = document.getElementById("qrImage");
 	doc.addImage(imgQR, 241, 52, 30,30)
-
 	// Define el texto que deseas centrar	
 	var text = var_tag;
 
@@ -168,7 +170,7 @@ function generate() {
 	doc.text(fechvenc, 77, 82);
 	doc.setFontSize(23);
 	doc.text(year, 13, 143);
-	doc.text(make, 13, 152);
+	doc.text(marca, 13, 152);
 	doc.text(vin, 196, 143);
 
 
@@ -218,7 +220,7 @@ function generate() {
 	doc.text(fechaFormateada, 62, 58.3);
 	doc.text(vin, 62, 63.8);
 	doc.text(color, 62, 80.3);
-	doc.text(make, 62, 74.8);
+	doc.text(marca, 62, 74.8);
 	doc.text(year, 62, 69.3);
 	doc.text(body_style, 150, 69.3)
 	doc.text(model, 150, 74.8);
