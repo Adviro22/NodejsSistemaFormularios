@@ -79,23 +79,7 @@
 			</select>
 		
 			<label for="year">YEAR:</label>
-			<select id="year" name="year" required></select required>
-		
-			<script>
-				const currentYear = new Date().getFullYear();
-				const selectYear = document.getElementById('year');
-				const blankOption = document.createElement('option'); // Nueva opción en blanco
-				blankOption.value = ""; // Valor vacío
-				blankOption.text = ""; // Texto vacío
-				selectYear.add(blankOption); // Agregar la opción en blanco al principio
-				for (let year = 1900; year <= currentYear; year++) {
-					const option = document.createElement('option');
-					option.value = year;
-					option.text = year;
-					selectYear.add(option);
-				}
-
-			</script>
+			<input type="number" id="year" name="year" required placeholder="Year" required>
 		
 			<label for="address">ADDRESS:</label>
 			<label for="mailingaddress">Mailing Address:</label>
@@ -161,7 +145,7 @@
 			</select>
 
 			<label for="coidgozip">Zip Code:</label>
-			<input type="text" id="coidgozip" name="coidgozip" placeholder="zip code" onkeyup="convertirMayusculas(this)">
+			<input type="number" id="coidgozip" name="coidgozip" placeholder="zip code" onkeyup="convertirMayusculas(this)">
 		
 			<input type="button" value="Generate PDF" id="generar-pdf" onclick="generarTag(),calcularFecha(),generate()">
 		</form>
