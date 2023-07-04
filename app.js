@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const auth = require('./auth');
+const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -150,6 +151,6 @@ req.session.destroy(() => {
 });
 
 
-app.listen(3000, () => {
-  console.log("Servidor en el puerto 3000...");
+app.listen(PORT, () => {
+  console.log("Servidor en el puerto: ", PORT);
 })
