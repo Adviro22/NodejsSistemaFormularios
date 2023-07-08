@@ -1,34 +1,32 @@
-const express = require("express");
+import express from "express";
+import { auth } from './auth.js';
+import dotenv from 'dotenv';
+import bcryptjs from 'bcryptjs';
+import session from 'express-session';
+import connection from './database/db.js';
+
+dotenv.config({path:'./env/.env'});
+
 const app = express();
-const auth = require('./auth');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001 ;
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-const dotenv = require('dotenv');
-dotenv.config({path:'./env/.env'});
-
 app.use('/resources', express.static('public'));
-app.use('/resources', express.static(__dirname + '/public'));
+app.use('/resources', express.static(import.meta.url + '/public'));
 
 app.set('view engine', 'ejs');
 
-const bcryptjs = require('bcryptjs');
-
-const session = require('express-session');
 app.use(session({
   secret: 'my-secret-key',
   resave: false,
   saveUninitialized: false
 }));
 
-const connection = require('./database/db');
-
-
 app.get("/register", (req, res) => {
   res.render('register')
-})
+});
 
 app.get('/login', (req, res) => {
   res.render('login');
@@ -154,3 +152,5 @@ req.session.destroy(() => {
 app.listen(PORT, () => {
   console.log("Servidor en el puerto: ", PORT);
 })
+
+export default app;
